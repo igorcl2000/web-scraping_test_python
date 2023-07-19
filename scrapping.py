@@ -4,8 +4,8 @@ import re
 import pandas as pd
 import math
 
-#url = 'https://www.kabum.com.br/cadeiras/cadeiras-gamer'
-url = 'https://www.kabum.com.br/computadores/notebooks'
+url = 'https://www.kabum.com.br/cadeiras/cadeiras-gamer'
+#url = 'https://www.kabum.com.br/computadores/notebooks'
 
 headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"}
 
@@ -21,8 +21,8 @@ ultima_pagina = math.ceil(int(qtd)/ 20)
 dic_produtos = {'marca':[], 'preco':[]}
 
 for i in range(1, ultima_pagina+1):
-    #url_pag = f'https://www.kabum.com.br/cadeiras/cadeiras-gamer?page_number={i}&page_size=20&facet_filters=&sort=most_searched'
-    url_pag = f'https://www.kabum.com.br/computadores/notebooks?page_number={i}&page_size=20&facet_filters=&sort=most_searched'
+    url_pag = f'https://www.kabum.com.br/cadeiras/cadeiras-gamer?page_number={i}&page_size=20&facet_filters=&sort=most_searched'
+    #url_pag = f'https://www.kabum.com.br/computadores/notebooks?page_number={i}&page_size=20&facet_filters=&sort=most_searched'
     site = requests.get(url_pag, headers=headers)
     soup = BeautifulSoup(site.content, 'html.parser')
     produtos = soup.find_all('div', class_=re.compile('productCard'))
@@ -40,7 +40,7 @@ for i in range(1, ultima_pagina+1):
 
 
 df = pd.DataFrame(dic_produtos)
-df.to_csv('D:/GitHub/web-scraping/preco_notebooks.csv', encoding='utf-8', sep=';')
+df.to_csv('D:/GitHub/web-scraping/preco_notebooks1.csv', encoding='utf-8', sep=';')
 
 
 
